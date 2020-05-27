@@ -1,17 +1,27 @@
 package wawer.kamil.teaitydzien11;
 
-import wawer.kamil.teaitydzien11.abstractfactory.factorymeal.FactoryMeal;
-import wawer.kamil.teaitydzien11.abstractfactory.factorymeal.FactoryMealImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import wawer.kamil.teaitydzien11.abstractfactory.meals.Meal;
-import wawer.kamil.teaitydzien11.abstractfactory.meals.MealType;
 
+@Service
+@Repository
 public class Restaurant {
 
-    public static void main(String[] args) {
-        FactoryMeal factoryMeal = new FactoryMealImpl();
-        Meal fastFoodMeal = factoryMeal.getMeal(MealType.FAST_FOOD);
-        Meal proteinFoodMeal = factoryMeal.getMeal(MealType.PROTEIN);
-        System.out.println(fastFoodMeal.getName());
-        System.out.println(proteinFoodMeal.getName());
+    private Meal meal;
+
+    @Autowired
+    public Restaurant( @Qualifier(value = "VegeMeal") Meal meal) {
+      this.meal = meal;
     }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void get(){
+        System.out.println(meal.getName());
+    }
+
 }

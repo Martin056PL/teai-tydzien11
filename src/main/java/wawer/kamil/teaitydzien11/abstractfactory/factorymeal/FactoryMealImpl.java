@@ -1,7 +1,9 @@
 package wawer.kamil.teaitydzien11.abstractfactory.factorymeal;
 
+import org.springframework.stereotype.Component;
 import wawer.kamil.teaitydzien11.abstractfactory.meals.*;
 
+@Component
 public class FactoryMealImpl implements FactoryMeal {
 
     @Override
