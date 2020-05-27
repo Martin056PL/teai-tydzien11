@@ -6,7 +6,9 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import wawer.kamil.teaitydzien11.abstractfactory.meals.FoodTypeAnnotation;
 import wawer.kamil.teaitydzien11.abstractfactory.meals.Meal;
+import wawer.kamil.teaitydzien11.abstractfactory.meals.MealType;
 
 @Service
 @Repository
@@ -15,7 +17,7 @@ public class Restaurant {
     private Meal meal;
 
     @Autowired
-    public Restaurant( @Qualifier(value = "VegeMeal") Meal meal) {
+    public Restaurant( @FoodTypeAnnotation(mealType = MealType.VEGE) Meal meal) {
       this.meal = meal;
     }
 
